@@ -1,0 +1,19 @@
+{
+  "name": "vef2verk2",
+  "version": "1.0.0",
+  "description": "event system",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Stulli888/Vef2verk2.git"
+  },
+  "author": "Sturla Freyr Magnússon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Stulli888/Vef2verk2/issues"
+  },
+  "homepage": "https://github.com/Stulli888/Vef2verk2#readme"
+}
