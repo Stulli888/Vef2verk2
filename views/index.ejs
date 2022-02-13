@@ -1,0 +1,16 @@
+<%- include('header') -%>
+
+<h1>Ég er stolltur af þér!</h1>
+
+<table>
+	<% events.forEach((row) => { %>
+	<tr>
+      <td class="id"><%= row.id %></td>
+      <td class="name"><%= row.name %></td>
+      <td class="slug"><%= row.slug %></td>
+      <td class="description"><%= row.description %></td>
+    </tr>
+    <% }) %>
+</table>
+
+<%- include('footer') -%>
