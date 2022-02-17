@@ -70,13 +70,33 @@ export async function allEvents() {
       FROM events
     `;
     const queryResult = await query(q, '');
-    console.log(queryResult);
 
     if (queryResult && queryResult.rows) {
       result = queryResult.rows;
     }
   } catch (e) {
     console.error('Error selecting events', e);
+  }
+  console.log(result);
+  return result;
+}
+
+export async function getEvent(id) {
+  console.log('Hæ ég er á ',id);
+  let result = [];
+  try {
+    const q = `
+      SELECT *
+      FROM events
+      WHERE id = $1
+    `;
+    const qresult = await query(q, [id]);
+
+    if (qresult && qresult.rows) {
+      result = qresult.rows[0];
+    }
+  } catch (e) {
+    console.error('Error getting event', e);
   }
   return result;
 }

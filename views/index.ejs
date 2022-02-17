@@ -1,16 +1,19 @@
 <%- include('header') -%>
 
-<h1>Ég er stolltur af þér!</h1>
+<h1>Viðburðasíðan</h1>
+<h2>Spennandi viðburðir á næstunni</h2>
 
 <table>
 	<% events.forEach((row) => { %>
 	<tr>
-      <td class="id"><%= row.id %></td>
-      <td class="name"><%= row.name %></td>
-      <td class="slug"><%= row.slug %></td>
+      <td class="name"><a href=/event/<%-row.id%>><%= row.name %></a></td>
+    </tr>
+    <tr> 
       <td class="description"><%= row.description %></td>
     </tr>
     <% }) %>
 </table>
+
+<a href=/admin>Innskráning stjórnanda</a>
 
 <%- include('footer') -%>

@@ -3,10 +3,9 @@ import { catchErrors } from '../lib/catch-errors.js';
 
 import { allEvents } from '../lib/db.js';
 
-export const indexRouter = express.Router();
+export const router = express.Router();
 
 async function indexRoute(req, res) {
-  //const events = await listEvents();
   const events = await allEvents();
   res.render('index', {
     title: 'Viðburðasíðan',
@@ -14,6 +13,6 @@ async function indexRoute(req, res) {
   });
 }
 
-indexRouter.get('/', catchErrors(indexRoute));
+router.get('/', catchErrors(indexRoute));
 
 // TODO útfæra öll routes
