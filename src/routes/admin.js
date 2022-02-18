@@ -1,4 +1,5 @@
 import express from 'express';
+import { body, validationResult } from 'express-validator';
 import xss from 'xss';
 
 import { allEvents, insertEvent } from '../lib/db.js';
@@ -38,12 +39,51 @@ async function newEvent(req, res){
   res.redirect('/admin');
 }
 
+const validationMiddleware = [
+  body('name')
+    .isLength({ min: 1 })
+    .withMessage('Nafn má ekki vera tómt'),
+  body('name')
+    .isLength({ max: 64 })
+    .withMessage('Nafn má að hámarki vera 64 stafir'),
+  body('slug')
+    .isLength({ max: 64 })
+    .withMessage('Slug má að hámarki vera 64 stafir'),
+  body('description')
+    .isLength({ max: 128 })
+    .withMessage('Lýsing er of löng')
+];
+const xssSanitizationMiddleware = [
+  body('name').customSanitizer((v) => xss(v)),
+  body('slug').customSanitizer((v) => xss(v)),
+  body('description').customSanitizer((v) => xss(v))
+];
+const sanitizationMiddleware = [
+  body('name').trim().escape(),
+];
+
+async function validationCheck(req, res, next) {
+  const {
+    name, slug, description
+  } = req.body;
+
+  const validation = validationResult(req);
+
+  if (!validation.isEmpty()) {
+    return res.render('error', { title: 'Validation villa', errors: validation.errors });
+  }
+
+  return next();
+}
 
 router.get('/', ensureLoggedIn, catchErrors(index));
 router.get('/login', login);
-router.post('/new', ensureLoggedIn, catchErrors(newEvent))
-
-
+router.post('/new', ensureLoggedIn,
+                    validationMiddleware,
+                    xssSanitizationMiddleware,
+                    catchErrors(validationCheck),
+                    sanitizationMiddleware,
+                    catchErrors(newEvent));
 router.post(
   '/login',
 

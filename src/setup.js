@@ -24,7 +24,7 @@ function createFakeEntries(k){
   while(fake.length < k){
     fake.push({
       name: faker.name.findName(),
-      comment: Math.random() < 0.5 ? '' : faker.lorem.sentence()
+      comment: Math.random() < 0.8 ? '' : faker.lorem.sentence()
     })
   }
   return fake;
