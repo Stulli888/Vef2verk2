@@ -30,7 +30,7 @@ app.set('views', join(path, '../views'));
 app.set('view engine', 'ejs');
 
 app.use(session({
-  secret: SESSION_SECRET,
+  secret: sessionSecret,
   resave: false,
   saveUninitialized: false,
   maxAge: 20 * 1000, // 20 sek
