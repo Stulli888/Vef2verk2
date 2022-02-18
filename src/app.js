@@ -65,7 +65,7 @@ app.use('/event', eventRouter);
 /** Middleware sem sér um 404 villur. */
 app.use((req, res) => {
   const title = 'Síða fannst ekki';
-  res.status(404).render('error', { title });
+  res.status(404).render('error', { title, errors: '' });
 });
 
 /** Middleware sem sér um villumeðhöndlun. */
@@ -73,7 +73,7 @@ app.use((req, res) => {
 app.use((err, req, res, next) => {
   console.error(err);
   const title = 'Villa kom upp';
-  res.status(500).render('error', { title });
+  res.status(500).render('error', { title, errors: '' });
 });
 
 app.listen(port, () => {
