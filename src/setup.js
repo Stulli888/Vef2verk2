@@ -60,7 +60,6 @@ async function create() {
 
   for (let i = 0; i < fakePeople.length; i++) {
     const fp = fakePeople[i];
-    console.log('i >>> ', (i%n)+1)
     let t = (i%n)+1
     try {
       // eslint-disable-next-line no-await-in-loop
