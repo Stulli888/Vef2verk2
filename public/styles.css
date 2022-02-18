@@ -1,29 +1,167 @@
-html {
-  box-sizing: border-box;
+* {
+  padding: 0;
+  margin: 0;
 }
 
 *,
 *::before,
 *::after {
   box-sizing: inherit;
+}
+
+:root {
+  --color-paperwhite: #ffe;
+  --color-error: #a77;
+  --color-accent: #aa6;
+}
+
+html {
+  background-color: var(--color-paperwhite);
+
+  box-sizing: border-box;
+
+  font-family: 'Georgia', serif;
+  font-size: 20px;
+}
+
+input,
+textarea,
+button {
+  font-family: 'Georgia', sans-serif;
+  font-size: 20px;
+}
+
+h1, h2 {
   margin: 0;
-  padding: 0;
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+h1 {
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 1.4rem;
+  padding-bottom: 1rem;
+  text-align: left;
 }
 
 body {
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  margin: 0 auto;
-  max-width: 900px;
-  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+
+  margin-top: 4rem;
+  padding: 0.5rem;
 }
 
-h1,
-h2,
-h3 {
+main {
+  margin: auto;
+  width: 100%;
+  max-width: 1000px;
+}
+
+table {
+  padding-bottom: 3rem;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.date {
+  text-align: right;
+}
+
+.name {
+  text-align: left;
+}
+
+.comment {
+  text-align: center;
+}
+
+.description {
+  font-size: 1.6rem;
+  padding-bottom: 2rem;
+}
+
+a {
+  color: saddlebrown;
+  font-size: 1.8rem;
+  text-decoration-color: saddlebrown;
+}
+
+a:visited {
+  color: saddlebrown;
+}
+.index-description {
+  font-style: italic;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   margin-bottom: 1rem;
 }
 
-section {
+.form--separated {
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 2px dotted var(--color-accent);
+}
+
+.field {
+  display: flex;
+  align-items: center;
+
+  width: 100%;
   margin-bottom: 1rem;
+}
+
+.field label {
+  font-size: 1rem;
+  min-width: 140px;
+}
+
+.field input,
+.field textarea {
+  flex: 1;
+  width: 100%;
+
+  padding: 8px;
+
+  border: 1px solid var(--color-accent);
+  border-radius: 3px;
+}
+
+.field textarea {
+  flex: 1;
+  min-height: 3rem;
+}
+
+.button {
+  width: 100%;
+  max-width: 300px;
+  border: 1px solid var(--color-accent);
+  border-radius: 8px;
+  padding: 0.5rem;
+  background-color: #fff;
+  transition: background-color ease-in 300ms;
+}
+
+.button:hover {
+  background-color: var(--color-accent);
+}
+
+.button--margin {
+  margin-top: 1rem;
+}
+
+.button--large {
+  font-size: 2rem;
+}
+
+input {
+  align-items: flex-start;
 }

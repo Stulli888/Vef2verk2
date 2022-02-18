@@ -8,8 +8,8 @@ CREATE TABLE IF NOT EXISTS events(
 	lastedit timestamp with time zone not null default current_timestamp
 );
 
-DROP TABLE IF EXISTS entry;
-CREATE TABLE IF NOT EXISTS entry(
+DROP TABLE IF EXISTS entries;
+CREATE TABLE IF NOT EXISTS entries(
 	id serial primary key,
 	name varchar(64) not null,
 	comment text,
@@ -20,8 +20,8 @@ CREATE TABLE IF NOT EXISTS entry(
 DROP TABLE IF EXISTS users;
 CREATE TABLE IF NOT EXISTS users (
   id serial primary key,
-  username character varying(255) NOT NULL,
-  password character varying(255) NOT NULL
+  username character varying(64) NOT NULL,
+  password character varying(256) NOT NULL
 );
 
 -- Lykilorð: "123"

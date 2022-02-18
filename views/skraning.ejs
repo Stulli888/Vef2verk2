@@ -1,0 +1,14 @@
+<h2>Skráðu þig:</h2>
+   	<form method="post" action="/event/entry" class="form form--seperated">
+   	<div class="field">  
+      <label for="name">Nafn:</label><br>
+      <input type="text" id="name" name="name">
+    </div>
+    <div class="field">
+      <label for="comment">Athugasemd:</label>
+      <input type="text" id="descrip" name="comment">
+    </div>
+
+    <input type="hidden" value="<%= content.id %>" name="id">
+    <button class="button button--large button--margin">Skrifa undir</button>
+   	</form>

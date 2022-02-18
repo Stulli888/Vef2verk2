@@ -1,8 +1,10 @@
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
+
 import dotenv from 'dotenv';
 import express from 'express';
 import session from 'express-session';
-import { dirname, join } from 'path';
-import { fileURLToPath } from 'url';
+import { format } from 'date-fns';
 
 import passport from './login.js';
 import { router as indexRouter } from './routes/index-routes.js';
@@ -39,6 +41,17 @@ app.use(passport.session());
 
 app.locals = {
   // TODO hjálparföll fyrir template
+};
+app.locals.formatDate = (str) => {
+  let date = '';
+
+  try {
+    date = format(str || '', 'dd.MM.yyyy');
+  } catch {
+    return '';
+  }
+
+  return date;
 };
 
 app.use('/', indexRouter);

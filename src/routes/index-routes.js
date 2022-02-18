@@ -9,7 +9,8 @@ async function indexRoute(req, res) {
   const events = await allEvents();
   res.render('index', {
     title: 'Viðburðasíðan',
-    events
+    events,
+    admin: false
   });
 }
 

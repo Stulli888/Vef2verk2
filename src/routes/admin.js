@@ -1,6 +1,7 @@
 import express from 'express';
 import xss from 'xss';
 
+import { allEvents, insertEvent } from '../lib/db.js';
 import passport, { ensureLoggedIn } from '../login.js';
 import { catchErrors } from '../lib/catch-errors.js';
 
@@ -8,8 +9,8 @@ export const router = express.Router();
 
 async function index(req, res) {
   const { search } = req.query;
-
-	return res.render('admin', { title: 'Stjórnandasíða', admin: true, search: xss(search),});
+  const events = await allEvents();
+	return res.render('index', { title: 'Stjórnandasíða', events, admin: true, search: xss(search),});
 };
 
 function login(req, res) {
@@ -29,10 +30,18 @@ function login(req, res) {
   return res.render('login', { message, title: 'Innskráning' });
 }
 
+async function newEvent(req, res){
+  const {
+    name, descrip
+  } = req.body;
+  insertEvent(name,descrip);
+  res.redirect('/admin');
+}
+
 
 router.get('/', ensureLoggedIn, catchErrors(index));
 router.get('/login', login);
-
+router.post('/new', ensureLoggedIn, catchErrors(newEvent))
 
 
 router.post(

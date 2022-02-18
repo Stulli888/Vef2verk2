@@ -2,4 +2,26 @@
 
 <h1> <%= content.name %> </h1>
 
+<p class="description"> <%= content.description %> </p>
+
+<% if (entries.length === 0) { %>
+    <p>Engar skráningar á viðburð.</p>
+<% } else { %>
+	<table class="entries_table" cellpadding="0">
+      <tr>
+        <th class="name">Nafn</th>
+        <th class="comment">Athugasemd</th>
+        <th class="date">Dags</th>
+   	  </tr>
+   	  <% entries.forEach((row) => { %>
+        <tr>
+          <td class="name"><%= row.name %></td>
+          <td class="comment"><%= row.comment %></td>
+          <td class="date"><%= formatDate(row.created) %></td>
+        </tr>
+      <% }) %>
+   	</table>
+<% } %>
+<%- include('skraning') -%>    
+
 <%- include('footer') -%>

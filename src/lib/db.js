@@ -1,5 +1,6 @@
 import { readFile } from 'fs/promises';
 import pg from 'pg';
+import{ faker } from '@faker-js/faker';
 
 const SCHEMA_FILE = './sql/schema.sql';
 const DROP_SCHEMA_FILE = './sql/drop.sql';
@@ -77,12 +78,10 @@ export async function allEvents() {
   } catch (e) {
     console.error('Error selecting events', e);
   }
-  console.log(result);
   return result;
 }
 
 export async function getEvent(id) {
-  console.log('Hæ ég er á ',id);
   let result = [];
   try {
     const q = `
@@ -99,4 +98,57 @@ export async function getEvent(id) {
     console.error('Error getting event', e);
   }
   return result;
+}
+
+export async function insertEvent(name, descrip){
+  let success = true;
+  const q = `
+    INSERT INTO events
+      (name, slug, description)
+    VALUES
+      ($1, $2, $3);
+  `;
+  try {
+    await query(q, [name, faker.helpers.slugify(name) , descrip]);
+  } catch (e) {
+    console.error('Error inserting signature', e);
+    success = false;
+  }
+  return success;
+}
+
+export async function getEntries(event){
+  let result = [];
+  try {
+    const q = `
+      SELECT *
+      FROM entries
+      WHERE event = $1
+    `;
+    const qresult = await query(q, [event]);
+
+    if (qresult && qresult.rows) {
+      result = qresult.rows;
+    }
+  } catch (e) {
+    console.error('Error getting entries', e);
+  }
+  return result;
+}
+
+export async function insertEntry(name, comment, id){
+  let success = true;
+  const q = `
+  INSERT INTO entries
+    (name, comment, event)
+  VALUES
+    ($1, $2, $3);
+  `;
+  try {
+    await query(q, [name, comment, id]);
+  } catch (e) {
+    console.error('Error inserting entry', e);
+    success = false;
+  }
+  return success;
 }

@@ -9,11 +9,24 @@
       <td class="name"><a href=/event/<%-row.id%>><%= row.name %></a></td>
     </tr>
     <tr> 
-      <td class="description"><%= row.description %></td>
+      <td class="index-description"><%= row.description %></td>
     </tr>
     <% }) %>
 </table>
 
-<a href=/admin>Innskráning stjórnanda</a>
+<% if(admin){ %>
+   <h2>Skrá nýjan viðburð:</h2>
+   <form method="post" action="/admin/new">
+   <label for="name">Nafn viðburðar</label>
+   <input type="text" id="name" name="name">
+   <label for="descrip">Lýsing á viðburði</label>
+   <input type="text" id="descrip" name="descrip">
+   <input type="submit" value="Senda">
+   </form>
+ <% } else{ %>  
+    <a href=/admin>Innskráning stjórnanda</a>
+<% } %>
+
+
 
 <%- include('footer') -%>
